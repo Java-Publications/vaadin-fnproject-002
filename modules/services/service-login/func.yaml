@@ -1,5 +1,5 @@
 name: login
-version: 0.0.6
+version: 0.0.8
 runtime: java
 cmd: org.rapidpm.fnproject.helloworld.services.login.LoginServiceFN::checkLogin
 build_image: fnproject/fn-java-fdk-build:jdk9-1.0.59
