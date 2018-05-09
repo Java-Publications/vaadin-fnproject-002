@@ -13,7 +13,8 @@ public class LoginComponent extends Composite implements HasLogger {
   private final Button        cancelButton  = new Button();
   private final FormLayout    formLayout    = new FormLayout(loginField,
                                                              passwordField,
-                                                              new HorizontalLayout(okButton, cancelButton));
+                                                             new HorizontalLayout(okButton, cancelButton)
+  );
 
   public LoginComponent() {
 
@@ -30,10 +31,8 @@ public class LoginComponent extends Composite implements HasLogger {
 
     okButton.addClickListener((Button.ClickListener) clickEvent -> {
       LoginServiceClient client = new LoginServiceClient();
-      Login              login  = new Login();
-      login.setLogin(loginField.getValue());
-      login.setPassword(passwordField.getValue());
-      if(client.checkLogin(login)){
+      Login              login  = new Login(loginField.getValue(), passwordField.getValue());
+      if (client.checkLogin(login)) {
         LoginComponent.this.getUI().setContent(new DashboardComponent().postConstruct());
       } else {
         cancelButton.click();

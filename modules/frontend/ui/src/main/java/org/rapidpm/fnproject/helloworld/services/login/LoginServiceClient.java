@@ -10,6 +10,7 @@ import org.rapidpm.fnproject.helloworld.api.login.LoginService;
 import org.rapidpm.frp.functions.CheckedBiFunction;
 import org.rapidpm.frp.functions.CheckedFunction;
 import org.rapidpm.frp.model.Result;
+import org.rapidpm.frp.model.serial.Pair;
 
 public class LoginServiceClient implements LoginService {
 
@@ -35,10 +36,10 @@ public class LoginServiceClient implements LoginService {
     };
   }
 
-  private CheckedFunction<Login, String> toJson() {
+  public static CheckedFunction<Login, String> toJson() {
     return (login) -> {
       final ObjectMapper objectMapper = new ObjectMapper();
-      return objectMapper.writeValueAsString(login);
+      return objectMapper.writerFor(LoginJson.class).writeValueAsString(login);
     };
   }
 
@@ -46,7 +47,7 @@ public class LoginServiceClient implements LoginService {
   public boolean checkLogin(Login login) {
     if (login == null) return false;
     return toJson()
-        .apply(login)
+        .apply(new LoginJson(login.getLogin(), login.getPassword() ))
         .flatMap(loginAsJson ->
                      request()
                          .apply(URL, loginAsJson)
