@@ -1,6 +1,5 @@
 package org.rapidpm.fnproject.helloworld.services.login;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,9 +7,10 @@ import okhttp3.RequestBody;
 import org.rapidpm.fnproject.helloworld.api.login.Login;
 import org.rapidpm.fnproject.helloworld.api.login.LoginService;
 import org.rapidpm.frp.functions.CheckedBiFunction;
-import org.rapidpm.frp.functions.CheckedFunction;
 import org.rapidpm.frp.model.Result;
-import org.rapidpm.frp.model.serial.Pair;
+
+import static org.rapidpm.fnproject.helloworld.api.login.Login.toJson;
+
 
 public class LoginServiceClient implements LoginService {
 
@@ -19,7 +19,7 @@ public class LoginServiceClient implements LoginService {
 
   public static final String URL = "http://127.0.0.1:8080/r/vaadin-fnproject-002/service-login";
 
-  //peforms best if client will be shared
+  //performs best if client will be shared
   private static final OkHttpClient client = new OkHttpClient();
 
   public CheckedBiFunction<String, String, String> request() {
@@ -36,18 +36,13 @@ public class LoginServiceClient implements LoginService {
     };
   }
 
-  public static CheckedFunction<Login, String> toJson() {
-    return (login) -> {
-      final ObjectMapper objectMapper = new ObjectMapper();
-      return objectMapper.writerFor(LoginJson.class).writeValueAsString(login);
-    };
-  }
+
 
   @Override
   public boolean checkLogin(Login login) {
     if (login == null) return false;
     return toJson()
-        .apply(new LoginJson(login.getLogin(), login.getPassword() ))
+        .apply(new Login(login.getLogin(), login.getPassword() ))
         .flatMap(loginAsJson ->
                      request()
                          .apply(URL, loginAsJson)

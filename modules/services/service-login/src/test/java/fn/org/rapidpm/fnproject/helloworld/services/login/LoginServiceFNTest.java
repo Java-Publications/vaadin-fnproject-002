@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.rapidpm.fnproject.helloworld.api.login.Login;
 import org.rapidpm.fnproject.helloworld.services.login.LoginServiceFN;
 import org.rapidpm.frp.functions.CheckedFunction;
-import org.rapidpm.frp.model.Pair;
 import org.rapidpm.frp.model.Triple;
 
 import java.util.function.Consumer;
@@ -21,23 +20,16 @@ public class LoginServiceFNTest {
   @Rule //junit4 !!
   public final FnTestingRule testing = FnTestingRule.createDefault();
 
-
-  private CheckedFunction<Pair<String, String>, String> toJson() {
-    return (p) -> {
+  public static CheckedFunction<Login, String> toJson() {
+    return (login) -> {
       final ObjectMapper objectMapper = new ObjectMapper();
-      final Login        login        = new Login();
-      login.setLogin(p.getT1());
-      login.setPassword(p.getT2());
-      String s = objectMapper.writeValueAsString(login);
-      System.out.println("s = " + s);
-      return s;
+      return objectMapper.writerFor(Login.class).writeValueAsString(login);
     };
   }
 
-
   private Consumer<Triple<String, String, String>> test() {
     return (triple) -> toJson()
-        .apply(Pair.next(triple.getT1(), triple.getT2()))
+        .apply(new Login(triple.getT1(), triple.getT2()))
         .ifAbsent(() -> {
           throw new RuntimeException("JSON Encoding failed for " + triple.getT1() + " - " + triple.getT2());
         })

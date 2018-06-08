@@ -1,48 +1,46 @@
 package org.rapidpm.fnproject.helloworld.api.login;
 
-import java.util.Objects;
 
-public class Login {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.rapidpm.frp.functions.CheckedFunction;
+import org.rapidpm.frp.model.serial.Pair;
 
-  private String login;
-  private String password;
+public class Login extends Pair<String, String> {
 
-  public String getLogin() {
-    return login;
+  /**
+   * <p>Constructor for Pair.</p>
+   *
+   * @param login    a T1 object.
+   * @param password a T2 object.
+   */
+  @JsonCreator
+  public Login(
+      @JsonProperty("login") String login,
+      @JsonProperty("password") String password) {
+    super(login, password);
   }
 
-  public void setLogin(String login) {
-    this.login = login;
+  public static CheckedFunction<Login, String> toJson() {
+    return (login) -> {
+      final ObjectMapper objectMapper = new ObjectMapper();
+      return objectMapper.writerFor(Login.class).writeValueAsString(login);
+    };
+  }
+
+  public static CheckedFunction<String, Login> fromJson() {
+    return (json) -> new ObjectMapper()
+        .readerFor(Login.class)
+        .readValue(json);
+  }
+
+  public String getLogin() {
+    return getT1();
   }
 
   public String getPassword() {
-    return password;
+    return getT2();
   }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Login)) return false;
-    Login login1 = (Login) o;
-    return Objects.equals(login, login1.login) &&
-           Objects.equals(password, login1.password);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(login, password);
-  }
-
-  @Override
-  public String toString() {
-    return "Login{" +
-           "login='" + login + '\'' +
-           ", password='" + password + '\'' +
-           '}';
-  }
 }

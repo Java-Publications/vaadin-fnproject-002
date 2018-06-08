@@ -1,27 +1,24 @@
 package junit.org.rapidpm.fnproject.helloworld.services.login;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.rapidpm.fnproject.helloworld.services.login.LoginJson;
-import org.rapidpm.fnproject.helloworld.services.login.LoginServiceClient;
-import org.rapidpm.frp.functions.CheckedFunction;
+import org.rapidpm.fnproject.helloworld.api.login.Login;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.rapidpm.fnproject.helloworld.api.login.Login.fromJson;
+
 
 public class LoginServiceClientTest {
 
   @Test
   void test001() {
 
-    final LoginJson reference = new LoginJson("login", "passwd");
-    LoginServiceClient
+    final Login reference = new Login("login", "passwd");
+    Login
         .toJson()
         .apply(reference)
         .ifPresentOrElse(
-            json -> ((CheckedFunction<String, LoginJson>) s -> new ObjectMapper()
-                .readerFor(LoginJson.class)
-                .readValue(json))
+            json -> fromJson()
                 .apply(json)
                 .ifPresentOrElse(
                     login -> assertEquals(reference, login),

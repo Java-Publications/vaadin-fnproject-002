@@ -18,7 +18,19 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+    <jackson-databind.version>2.9.5</jackson-databind.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson-databind.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
 
   <build>
     <plugins>
@@ -38,13 +50,12 @@
     <snapshotRepository>
       <id>repo-fnproject</id>
       <name>The repo for this project</name>
-      <!--<url>${sonatype-nexus-snapshots-url}</url>-->
       <url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
     <!--<repository>-->
-      <!--<id>repo-fnproject</id>-->
-      <!--<name>The repo for this project</name>-->
-      <!--<url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</url>-->
+    <!--<id>repo-fnproject</id>-->
+    <!--<name>The repo for this project</name>-->
+    <!--<url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</url>-->
     <!--</repository>-->
   </distributionManagement>
 

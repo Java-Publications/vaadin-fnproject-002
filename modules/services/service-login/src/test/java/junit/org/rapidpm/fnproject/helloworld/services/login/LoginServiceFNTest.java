@@ -9,27 +9,21 @@ class LoginServiceFNTest {
 
   @Test
   void checkLogin000() {
-    final Login login = new Login();
-    login.setLogin("admin");
-    login.setPassword("admin");
+    final Login login = new Login("admin", "admin");
     boolean checkLogin = new LoginServiceFN().checkLogin(login);
     Assertions.assertTrue(checkLogin);
   }
 
   @Test
   void checkLogin001() {
-    final Login login = new Login();
-    login.setLogin("admin");
-    login.setPassword("");
+    final Login login = new Login("admin", "");
     boolean checkLogin = new LoginServiceFN().checkLogin(login);
     Assertions.assertFalse(checkLogin);
   }
 
   @Test
   void checkLogin002() {
-    final Login login = new Login();
-    login.setLogin("admin");
-    login.setPassword(null);
+    final Login login = new Login("admin", null);
     boolean checkLogin = new LoginServiceFN().checkLogin(login);
     Assertions.assertFalse(checkLogin);
   }
