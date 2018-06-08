@@ -18,7 +18,7 @@
     <junit.jupiter.version>5.1.1</junit.jupiter.version>
     <junit.vintage.version>5.1.1</junit.vintage.version>
     <junit.platform.version>1.1.1</junit.platform.version>
-    <rapidpm-functional-reactive.version>0.5.2</rapidpm-functional-reactive.version>
+    <rapidpm-functional-reactive.version>0.5.3</rapidpm-functional-reactive.version>
 
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>

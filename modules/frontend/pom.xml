@@ -32,10 +32,10 @@
     <!--Undertow-->
     <undertow.version>1.4.22.Final</undertow.version>
     <!--Vaadin-->
-    <vaadin.version>8.3.1</vaadin.version>
+    <vaadin.version>8.4.2</vaadin.version>
     <vaadin-testbench-api.version>5.1.1</vaadin-testbench-api.version>
     <!--TDD-->
-    <jacoco.version>0.8.0</jacoco.version>
+    <jacoco.version>0.8.1</jacoco.version>
     <pitest-prod-classes>org.rapidpm.vaadin*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
@@ -45,8 +45,8 @@
 
     <!--RapidPM bundles-->
     <rapidpm-vaadin-addons.version>0.2.0</rapidpm-vaadin-addons.version>
-    <rapidpm-dependencies-core-logger.version>3.5.9</rapidpm-dependencies-core-logger.version>
-    <rapidpm-functional-reactive.version>0.5.2</rapidpm-functional-reactive.version>
+    <rapidpm-dependencies-core-logger.version>3.5.10</rapidpm-dependencies-core-logger.version>
+    <rapidpm-functional-reactive.version>0.5.3</rapidpm-functional-reactive.version>
   </properties>
 
   <dependencyManagement>
