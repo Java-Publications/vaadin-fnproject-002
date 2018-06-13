@@ -28,7 +28,6 @@ public class LoginComponent extends Composite implements HasLogger {
   }
 
   public Component postConstruct() {
-
     okButton.addClickListener((Button.ClickListener) clickEvent -> {
       LoginServiceClient client = new LoginServiceClient();
       Login              login  = new Login(loginField.getValue(), passwordField.getValue());

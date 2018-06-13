@@ -19,7 +19,6 @@ public class DashboardComponent extends Composite implements HasLogger {
   }
 
   public Component postConstruct() {
-
     logoutButton.addClickListener(e -> {
       VaadinSession
           .getCurrent()

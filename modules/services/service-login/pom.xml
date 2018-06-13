@@ -41,7 +41,7 @@
     <repository>
       <id>repo-fnproject</id>
       <name>The repo for this pipeline</name>
-      <url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</url>
+      <url>http://nexus.rapidpm.org/repository/maven-snapshots/</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
